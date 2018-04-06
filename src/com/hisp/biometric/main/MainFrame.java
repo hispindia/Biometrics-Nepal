@@ -415,7 +415,7 @@ public class MainFrame extends javax.swing.JFrame {
 					bRegister = true;
                                         bIdentify=false;
                                         registerRequest = false;
-					textArea.setText("Please place your finger 3 times!");
+					textArea.setText("Please place your finger 3 times");
 				}
                                 teiValidated=null;
                                 
