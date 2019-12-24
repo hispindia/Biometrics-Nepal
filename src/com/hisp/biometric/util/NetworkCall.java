@@ -79,7 +79,7 @@ public class NetworkCall {
             dhis_domain = config.getDhisUrl();
             LATEST_FID_URL = dhis_domain+LATES_FID_SUFFIX+config.getSqlViewID()+"/data.json?paging=false";
             ALL_TEI_DATA_URL = dhis_domain+ALL_TEI_DATA_SUFFIX+"&attribute="
-                    +config.getFingerprintStringAttribute()+"&attribute="+config.getFidAttribute();
+                    +config.getFingerprintStringAttribute()+"&attribute="+config.getFidAttribute()+"&program="+config.getProgram_hiv();
             String tscheme = dhis_domain.substring(0,dhis_domain.indexOf(":"));
             if(tscheme.length()==4 || tscheme.length()==5) HTTPSCHEME = tscheme;
             
