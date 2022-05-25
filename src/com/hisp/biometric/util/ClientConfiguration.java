@@ -16,7 +16,10 @@ public class ClientConfiguration {
     String fingerprintUrl;
     transient String userName;
     transient String password;
-    
+
+    //String biometric_user_name;
+    //String biometric_user_password;
+
     String host;
     int port;
     
@@ -151,7 +154,24 @@ public class ClientConfiguration {
     public void setProgram_hiv(String program_hiv) {
         this.program_hiv = program_hiv;
     }
-    
+
+/*
+   public String getBiometric_user_name() {
+        return biometric_user_name;
+    }
+
+    public void setBiometric_user_name(String biometric_user_name) {
+        this.biometric_user_name = biometric_user_name;
+    }
+
+    public String getBiometric_user_password() {
+        return biometric_user_password;
+    }
+
+    public void setBiometric_user_password(String biometric_user_password) {
+        this.biometric_user_password = biometric_user_password;
+    }
+ */       
     
     @Override
     public String toString(){

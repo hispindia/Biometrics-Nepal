@@ -126,7 +126,9 @@ public class NetworkCall {
         System.out.println("Login Url :"+LOGIN_URL);
         System.out.println("ORGUNIT Url :" +ORGUNIT_URL);
         System.out.println(" SCHEME : "+HTTPSCHEME);
-                                                        
+      
+        //System.out.println(" biometric_user_name : " + clientConfiguration.getBiometric_user_name());
+        //System.out.println(" biometric_user_password : " + clientConfiguration.getBiometric_user_password());                                                   
                 
         
     }
@@ -215,7 +217,7 @@ public class NetworkCall {
                 System.out.println(responseStr);
                 
             }else{
-                System.out.println("Request : "+request.toString());
+                System.out.println("Request : " +request.toString());
                 NetworkException exception = NetworkExceptionFactory.getException(response.getStatusLine().getStatusCode());
                 System.out.print(exception);
                 throw exception;
@@ -379,11 +381,11 @@ public class NetworkCall {
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
         /*credsProvider.setCredentials(
                 new AuthScope(targetHost.getHostName(), targetHost.getPort()),
-                new UsernamePasswordCredentials("hispdev", "Devhisp@1"));*/
+                new UsernamePasswordCredentials("hispdev", "Devhisp@1"));
+        */
         credsProvider.setCredentials(
                 new AuthScope(targetHost.getHostName(), targetHost.getPort()),
                 new UsernamePasswordCredentials(clientConfiguration.getUserName().trim(),clientConfiguration.getPassword().trim()));
-        
         
         // Create AuthCache instance
         AuthCache authCache = new BasicAuthCache();
@@ -399,7 +401,9 @@ public class NetworkCall {
         try{
             
             HttpGet request = new HttpGet(LOGIN_URL);       
-            System.out.println(LOGIN_URL+ " : "+ clientConfiguration.getHost()+ " : "+ clientConfiguration.getPassword());
+            System.out.println( "login-url -- " + LOGIN_URL+ " host - : "+ clientConfiguration.getHost() + " entered user name : " + clientConfiguration.getUserName() + " entered user password : "+ clientConfiguration.getPassword());
+            //System.out.println("biometric_user_name : " + clientConfiguration.getBiometric_user_name()+ " biometric_user_password : "+ clientConfiguration.getBiometric_user_password());
+            
             CloseableHttpResponse response = httpclient.execute(
                 targetHost, request, context);
             if(response.getStatusLine().getStatusCode()==200){
@@ -456,10 +460,16 @@ public class NetworkCall {
         
         HttpHost targetHost = new HttpHost(clientConfiguration.getHost(), clientConfiguration.getPort(), HTTPSCHEME);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        /*
         credsProvider.setCredentials(
                 new AuthScope(targetHost.getHostName(), targetHost.getPort()),
                 new UsernamePasswordCredentials("hispdev","Devhisp@1"));
-
+        */
+        // add for get username and password from user entered
+        credsProvider.setCredentials(
+                new AuthScope(targetHost.getHostName(), targetHost.getPort()),
+                new UsernamePasswordCredentials(clientConfiguration.getUserName().trim(),clientConfiguration.getPassword().trim()));
+        
         // Create AuthCache instance
         AuthCache authCache = new BasicAuthCache();
         // Generate BASIC scheme object and add it to the local auth cache
@@ -521,10 +531,16 @@ public class NetworkCall {
         
         HttpHost targetHost = new HttpHost(clientConfiguration.getHost(), clientConfiguration.getPort(), HTTPSCHEME);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        /*
         credsProvider.setCredentials(
                 new AuthScope(targetHost.getHostName(), targetHost.getPort()),
                 new UsernamePasswordCredentials("hispdev","Devhisp@1"));
-
+        */
+        // add for get username and password from user entered
+        credsProvider.setCredentials(
+                new AuthScope(targetHost.getHostName(), targetHost.getPort()),
+                new UsernamePasswordCredentials(clientConfiguration.getUserName().trim(),clientConfiguration.getPassword().trim()));
+        
         // Create AuthCache instance
         AuthCache authCache = new BasicAuthCache();
         // Generate BASIC scheme object and add it to the local auth cache
@@ -583,10 +599,16 @@ public class NetworkCall {
         
         HttpHost targetHost = new HttpHost(clientConfiguration.getHost(), clientConfiguration.getPort(), HTTPSCHEME);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        /*
         credsProvider.setCredentials(
                 new AuthScope(targetHost.getHostName(), targetHost.getPort()),
                 new UsernamePasswordCredentials("hispdev","Devhisp@1"));
-
+        */
+        // add for get username and password from user entered
+        credsProvider.setCredentials(
+                new AuthScope(targetHost.getHostName(), targetHost.getPort()),
+                new UsernamePasswordCredentials(clientConfiguration.getUserName().trim(),clientConfiguration.getPassword().trim()));
+        
         // Create AuthCache instance
         AuthCache authCache = new BasicAuthCache();
         // Generate BASIC scheme object and add it to the local auth cache
