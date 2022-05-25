@@ -19,6 +19,9 @@ public class ServerConfiguration {
     String fingerprintStringAttribute;
     String fidAttribute;
     String program_hiv;
+
+    String biometric_user_name;
+    String biometric_user_password;
     
     public static ServerConfiguration getDefault(){
         ServerConfiguration sc = new ServerConfiguration();
@@ -72,8 +75,6 @@ public class ServerConfiguration {
         this.sqlViewID = sqlViewID;
     }
 
-    
-    
     public String getHost() {
         return host;
     }
@@ -96,6 +97,22 @@ public class ServerConfiguration {
 
     public void setProgram_hiv(String program_hiv) {
         this.program_hiv = program_hiv;
+    }
+
+    public String getBiometric_user_name() {
+        return biometric_user_name;
+    }
+
+    public void setBiometric_user_name(String biometric_user_name) {
+        this.biometric_user_name = biometric_user_name;
+    }
+
+    public String getBiometric_user_password() {
+        return biometric_user_password;
+    }
+
+    public void setBiometric_user_password(String biometric_user_password) {
+        this.biometric_user_password = biometric_user_password;
     }
     
     @Override

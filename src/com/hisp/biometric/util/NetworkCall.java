@@ -206,10 +206,18 @@ public class NetworkCall {
         Integer latestFID = null;
         HttpHost targetHost = new HttpHost( config.getHost(), config.getPort(), HTTPSCHEME);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        /*
         credsProvider.setCredentials(
                 new AuthScope(targetHost.getHostName(), targetHost.getPort()),
                 new UsernamePasswordCredentials("hispdev", "Devhisp@1"));
-
+        */
+        // add for get username and password from DHF_HOME/dhis.config
+        credsProvider.setCredentials(
+                new AuthScope(targetHost.getHostName(), targetHost.getPort()),
+                new UsernamePasswordCredentials(config.getBiometric_user_name().trim(),config.getBiometric_user_password().trim()));
+        
+        System.out.println("biometric_user_name  :" + config.getBiometric_user_name() );
+        System.out.println("biometric_user_password  :" + config.getBiometric_user_password() );
         System.out.println("INSIDE Host  :" + config.getHost());
         System.out.println("INSIDE Port  :" + config.getPort());
         
@@ -293,10 +301,16 @@ public class NetworkCall {
 
         HttpHost targetHost = new HttpHost(config.getHost(), config.getPort(), HTTPSCHEME);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        /*        
         credsProvider.setCredentials(
                 new AuthScope(targetHost.getHostName(), targetHost.getPort()),
                 new UsernamePasswordCredentials("hispdev", "Devhisp@1"));
-
+        */
+        // add for get username and password from DHF_HOME/dhis.config
+        credsProvider.setCredentials(
+                new AuthScope(targetHost.getHostName(), targetHost.getPort()),
+                new UsernamePasswordCredentials(config.getBiometric_user_name().trim(),config.getBiometric_user_password().trim()));
+        
         // Create AuthCache instance
         AuthCache authCache = new BasicAuthCache();
         // Generate BASIC scheme object and add it to the local auth cache

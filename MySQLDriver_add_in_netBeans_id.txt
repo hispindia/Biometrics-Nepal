@@ -1,0 +1,7 @@
+Library Name - MySQLDriver
+
+jar file name - mysql-connector-java-8.0.29.jar
+
+Location - server-application\lib
+
+Ahmed
