@@ -216,8 +216,8 @@ public class NetworkCall {
                 new AuthScope(targetHost.getHostName(), targetHost.getPort()),
                 new UsernamePasswordCredentials(config.getBiometric_user_name().trim(),config.getBiometric_user_password().trim()));
         
-        System.out.println("biometric_user_name  :" + config.getBiometric_user_name() );
-        System.out.println("biometric_user_password  :" + config.getBiometric_user_password() );
+        //System.out.println("biometric_user_name  :" + config.getBiometric_user_name() );
+        //System.out.println("biometric_user_password  :" + config.getBiometric_user_password() );
         System.out.println("INSIDE Host  :" + config.getHost());
         System.out.println("INSIDE Port  :" + config.getPort());
         
