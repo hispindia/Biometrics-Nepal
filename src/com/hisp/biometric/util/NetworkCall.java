@@ -65,10 +65,10 @@ public class NetworkCall {
     public static final String DHIS_URL_REGISTER_SUFFIX = "/dhis-web-tracker-capture/index.html?key=register";//&string=abcde&fid=1
     public static String dhisRegisterUrl;
     
-    public static final String TEI_FROM_CLIENT_SUFFIX = "/api/trackedEntityInstances.json?ouMode=ALL&fields=trackedEntityInstance,attributes[*],orgUnit&filter=";
+    public static final String TEI_FROM_CLIENT_SUFFIX = "/api/trackedEntityInstances.json?program="+Constants.PROGRAM_HIV+"&ouMode=ALL&fields=trackedEntityInstance,attributes[*],orgUnit&filter=";
     public static String TEI_FROM_CLIENT_CODE;
     
-    public static final String TEI_FROM_FID_SUFFIX = "/api/trackedEntityInstances.json?ouMode=ALL&fields=trackedEntityInstance,attributes[*],orgUnit&filter=";
+    public static final String TEI_FROM_FID_SUFFIX = "/api/trackedEntityInstances.json?program="+Constants.PROGRAM_HIV+"&ouMode=ALL&fields=trackedEntityInstance,attributes[*],orgUnit&filter=";
     public static String TEI_FROM_FID_URL;
     public static final String TEI_URL_SUFFIX = "/api/trackedEntityInstances";
     public static String DHIS_TEI_URL;
