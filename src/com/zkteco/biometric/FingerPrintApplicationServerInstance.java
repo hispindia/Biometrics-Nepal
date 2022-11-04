@@ -84,7 +84,7 @@ public class FingerPrintApplicationServerInstance {
                 return false;
             }else{
                 lastFID = fid;
-                System.out.println("Latest Fid :"+ lastFID);
+                System.out.println("Latest Fid Server Application : "+ lastFID);
                 Logger.getLogger(FingerPrintApplicationServerInstance.class.getName()).log(Level.INFO,"Latest FID -- "+ lastFID);
                 List<FingerPrint> fingerprints;
                 
@@ -190,9 +190,10 @@ public class FingerPrintApplicationServerInstance {
         byte[] template = new byte[2048];
         FingerPrint fp = FingerPrint.fromJson(modelJSON);
         FingerprintSensorEx.Base64ToBlob(fp.getTemplate(), template, TEMPLATE_SIZE);
+        System.out.println(" lastFID "+lastFID);
         int fid = lastFID+1;
-        System.out.println(""+fid);
-        System.out.println(fp.getTemplate());
+        System.out.println(" new finger print id -- "+fid);
+        System.out.println(" new finger print String -- "+ fp.getTemplate());
         boolean ret = instance.addToDb(template, fid);
         //System.out.println(modelJSON);
         if(ret){

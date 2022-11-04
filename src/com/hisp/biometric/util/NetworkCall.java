@@ -79,7 +79,7 @@ public class NetworkCall {
             dhis_domain = config.getDhisUrl();
             LATEST_FID_URL = dhis_domain+LATES_FID_SUFFIX+config.getSqlViewID()+"/data.json?paging=false";
             ALL_TEI_DATA_URL = dhis_domain+ALL_TEI_DATA_SUFFIX+"&attribute="
-                    +config.getFingerprintStringAttribute()+"&attribute="+config.getFidAttribute()+"&program="+config.getProgram_hiv();
+                    +config.getFingerprintStringAttribute()+"&attribute="+config.getFidAttribute()+"&program="+config.getProgram_hiv()+"&skipPaging=true";
             String tscheme = dhis_domain.substring(0,dhis_domain.indexOf(":"));
             if(tscheme.length()==4 || tscheme.length()==5) HTTPSCHEME = tscheme;
             
@@ -91,7 +91,7 @@ public class NetworkCall {
             dhis_domain = config.getDhisUrl();
             LATEST_FID_URL = dhis_domain+LATES_FID_SUFFIX+config.getSqlViewID()+"/data?paging=false";
             ALL_TEI_DATA_URL = dhis_domain+ALL_TEI_DATA_SUFFIX+"&attribute="
-                    +config.getFingerprintStringAttribute()+"&attribute="+config.getFidAttribute()+"&program="+config.getProgram_hiv();
+                    +config.getFingerprintStringAttribute()+"&attribute="+config.getFidAttribute()+"&program="+config.getProgram_hiv()+"&skipPaging=true";
         }
         System.out.println("Dhis Domain : "+dhis_domain);
         Logger.getLogger(FingerPrintApplicationServerInstance.class.getName()).log(Level.INFO,"SCHEME : "+HTTPSCHEME);
@@ -329,6 +329,7 @@ public class NetworkCall {
             
         try {
             HttpGet httpget = new HttpGet(ALL_TEI_DATA_URL);
+            System.out.println(" 1 ALL_TEI_DATA_URL : --------- " + ALL_TEI_DATA_URL );
             CloseableHttpResponse response = httpclient.execute(
                 targetHost, httpget, context);
             if(response.getStatusLine().getStatusCode()==200){
