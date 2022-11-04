@@ -552,13 +552,13 @@ public class NetworkCall {
         context.setCredentialsProvider(credsProvider);
         context.setAuthCache(authCache);
         try{
-            
+            System.out.println(" TEI_FROM_FID_URL -- " + TEI_FROM_FID_URL+fid);
             HttpGet request = new HttpGet(TEI_FROM_FID_URL+fid);           
               CloseableHttpResponse response = httpclient.execute(
                 targetHost, request, context);
-              System.out.println(response.getStatusLine());
+              System.out.println( " 1 response getTrackedEntityInstanceWithfid " +  response.getStatusLine());
             if(response.getStatusLine().getStatusCode()==200){
-                System.out.println(response.getStatusLine());
+                System.out.println(" 2 response getTrackedEntityInstanceWithfid " + response.getStatusLine());
                 //InputStream is = response.getEntity().getContent();
                 //BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                 //String responseStr = "";
@@ -566,9 +566,9 @@ public class NetworkCall {
                     //responseStr +=reader.readLine();
                 //}
                 String responseStr = EntityUtils.toString(response.getEntity());
-                System.out.println(responseStr);
+                System.out.println( " responseStr " + responseStr);
                 TrackedEntityInstancesResponse teiResponse = TrackedEntityInstancesResponse.fromJson(responseStr);
-                System.out.println(teiResponse.getTEI(0) );
+                System.out.println(" responseStr TEI " + teiResponse.getTEI(0) );
                 tei = teiResponse.getTEI(0);
                        
             }else{
