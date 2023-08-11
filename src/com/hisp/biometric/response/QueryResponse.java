@@ -41,8 +41,11 @@ public class QueryResponse {
         ArrayList<FingerPrint> fingerprints = new ArrayList<FingerPrint>();
         for(List<String> row :rows){
             FingerPrint fp = new FingerPrint();
-            String template = row.get(8); // for finger-print string index changed in 2.38
-            String fidStr = row.get(9); // for finger-print id index changed in 2.38
+            String template = row.get(7);
+            String fidStr = row.get(8);
+
+            //String template = row.get(8); // for finger-print string index changed in 2.38
+            //String fidStr = row.get(9); // for finger-print id index changed in 2.38
             if(!fidStr.equals("")&& !template.equals("")){
                 try{
                     int fid = Integer.parseInt(fidStr);

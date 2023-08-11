@@ -43,6 +43,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.hisp.biometric.exception.*;
 import com.zkteco.biometric.FingerPrintApplicationServerInstance;
+import java.util.ArrayList;
 
 /**
  *This class to be used only in client application 
@@ -295,7 +296,7 @@ public class NetworkCall {
     }
     
     
-    
+    // for recognised finger-print query for all tei fingerprint-string and fingerprint-id SQL-VIEW name ALL_TEI_DATA_URL -- uid -- NHCQz7jhFzk
     public static List<FingerPrint> getAllFingerPrints() throws NetworkException{
         CloseableHttpClient httpclient = HttpClientBuilder.create().build();
 
@@ -324,20 +325,42 @@ public class NetworkCall {
         
         
         QueryResponse responseMapped = null;
+        String st = "";
+        ArrayList<FingerPrint> allFingerPrints = new ArrayList<FingerPrint>();
         //HttpGet httpget = new HttpGet(ALL_TEI_DATA_URL);
         //for (int i = 0; i < 3; i++) {
             
         try {
-            HttpGet httpget = new HttpGet(ALL_TEI_DATA_URL);
+            //HttpGet httpget = new HttpGet(ALL_TEI_DATA_URL);
+
+            HttpGet httpget = new HttpGet(dhis_domain + "/api/sqlViews/NHCQz7jhFzk/data?paging=false");
+ 
             System.out.println(" 1 ALL_TEI_DATA_URL : --------- " + ALL_TEI_DATA_URL );
+            System.out.println(" 1 ALL_TEI_DATA_URL NEW : --------- " + dhis_domain + "/api/sqlViews/NHCQz7jhFzk/data?paging=false" );
             CloseableHttpResponse response = httpclient.execute(
                 targetHost, httpget, context);
+
+            if(response.getStatusLine().getStatusCode()==200){
+                
+                HttpEntity entity = response.getEntity();
+                
+                //System.out.println("------------------------------- Latest entity " + entity );
+                
+                st = EntityUtils.toString(entity);
+                
+                response.close();
+                httpclient.close();
+            }
+
+/*
             if(response.getStatusLine().getStatusCode()==200){
                 HttpEntity entity = response.getEntity();
                 String st = EntityUtils.toString(entity);
                 responseMapped = QueryResponse.fromJson(st);
                 System.out.println("-------------------------------");
-            }else{
+            }
+*/
+            else{
                 response.close();
                 httpclient.close();
                 NetworkException exception = NetworkExceptionFactory.getException(response.getStatusLine().getStatusCode());
@@ -351,7 +374,8 @@ public class NetworkCall {
             
             response.close();
             httpclient.close();
-            return responseMapped.getFingerPrints();
+            return getAllFingerPrints( st );
+            //return responseMapped.getFingerPrints();
             //return responseMapped.getFID();
         } catch(IOException ex){
             ex.printStackTrace();
@@ -457,5 +481,54 @@ public class NetworkCall {
     }
 
 
+    public static List<FingerPrint> getAllFingerPrints(String jsonLine) {
+     
+    ArrayList<FingerPrint> fingerPrints = new ArrayList<FingerPrint>();
+     
+    JsonElement jelement = new JsonParser().parse(jsonLine);
+        
+    JsonObject  jobject = jelement.getAsJsonObject();
+    
+    //System.out.println("jobject  " + jobject );  
+    
+    jobject = jobject.getAsJsonObject("listGrid");
+    
+    //System.out.println("json jobject  listGrid :" + jobject );
+    
+    JsonArray jarray = jobject.getAsJsonArray("rows");
+    
+    //System.out.println("json jarray  rows :" + jarray );
+    System.out.println("All finger Print rows size :" + jarray.size() );
+    
+    //List<List<String>> rows = jarray;
+    
+    //System.out.println(  "ababa " + jarray.get(0) );
+    
+    for (int j = 0; j < jarray.size(); j++){
+
+        JsonArray fingerPrintData = jarray.get(j).getAsJsonArray();
+        String fingerPrintString = fingerPrintData.get(0).getAsString();
+
+        String fingerPrintId = fingerPrintData.get(1).getAsString();
+        FingerPrint fp = new FingerPrint();
+        String template = fingerPrintString;
+        String fidStr = fingerPrintId;
+
+        //String template = row.get(8); // for finger-print string index changed in 2.38
+        //String fidStr = row.get(9); // for finger-print id index changed in 2.38
+        if(!fidStr.equals("")&& !template.equals("")){
+            try{
+                int fid = Integer.parseInt(fidStr);
+                fp.setTemplate(template);
+                fp.setFid(fid);
+                fingerPrints.add(fp);
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+        } else {
+        }
+    }
+        return fingerPrints;
+    }
 }
 
